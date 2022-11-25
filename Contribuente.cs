@@ -131,8 +131,11 @@ namespace Calcolo_Imposte
             double imposta23 = _redditoAnnuale * 23 / 100;
             double imposta27 = (_redditoAnnuale - 15000) * 27 / 100 + 3450;
             double imposta38 = (_redditoAnnuale - 28000) * 38 / 100 + 6960;
-            
-                Console.WriteLine("=================================");
+            double imposta41 = (_redditoAnnuale - 55000) * 41 / 100 + 17220;
+            double imposta43 = (_redditoAnnuale - 75000) * 43 / 100 + 25.420;
+
+
+            Console.WriteLine("=================================");
                 Console.WriteLine($"\nContribuente {_nome} {_cognome}");
                 Console.WriteLine($"Nato il {_dataDiNascita} ({_sesso})");
                 Console.WriteLine($"Residente in {_comuneDiResidenza}");
@@ -149,6 +152,14 @@ namespace Calcolo_Imposte
             }if (_redditoAnnuale >= 28001 && _redditoAnnuale <= 55000)
             {
                 Console.WriteLine($"IMPOSTA DA VERSARE: {imposta38}");
+                StartMenu();
+            }if (_redditoAnnuale >= 55001 && _redditoAnnuale <= 75000)
+            {
+                Console.WriteLine($"IMPOSTA DA VERSARE: {imposta41}");
+                StartMenu();
+            }if (_redditoAnnuale > 75001)
+            {
+                Console.WriteLine($"IMPOSTA DA VERSARE: {imposta43}");
                 StartMenu();
             }
         }
