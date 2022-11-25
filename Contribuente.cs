@@ -20,8 +20,8 @@ namespace Calcolo_Imposte
             get { return _cognome; }
             set { _cognome = value; }
         }
-        private DateTime _dataDiNascita;
-        public DateTime DataDiNascita
+        private string _dataDiNascita;
+        public string DataDiNascita
         {
             get { return _dataDiNascita; }
             set { _dataDiNascita = value; }
@@ -58,20 +58,14 @@ namespace Calcolo_Imposte
                 Console.WriteLine("CALCOLO DELLE IMPOSTE INPS DA VERSARE");
                 Console.WriteLine("*************************************");
 
-                Console.WriteLine("\nBenvenuto, per calcolare le tue imposte, dovrai inserire i tuoi dati personali," +
-                    "a seguito della compilazione ti verra stampato il riepilogo comprensivo dell'importo da pagare," +
+                Console.WriteLine("\n===========================================================================");
+                Console.WriteLine("Benvenuto, per calcolare le tue imposte, dovrai inserire i tuoi dati\npersonali," +
+                    "a seguito della compilazione ti verra stampato il riepilogo\ncomprensivo dell'importo da pagare," +
                     "scegli l'operazione che vuoi effettuare: ");
-                Console.WriteLine("1. Inizia la compilazione: ");
+                Console.WriteLine("===========================================================================\n");
+                Console.WriteLine("1. Inizia la compilazione.");
                 Console.WriteLine("2. Non voglio pagare, scappo! ");
-                //Console.WriteLine("1. Inserisci il tuo NOME: ");
-                //Console.WriteLine("2. Inserisci il tuo COGNOME: ");
-                //Console.WriteLine("3. Inserisci la tua DATA DI NASCITA in formato(AAAA/MM/GG):");
-                //Console.WriteLine("4. Inserisci il tuo CODICE FISCALE: ");
-                //Console.WriteLine("5. Inserisci il tuo SESSO (m/f): ");
-                //Console.WriteLine("6. Inserisci il tuo COMUNE DI RESIDENZA: ");
-                //Console.WriteLine("7. Inserisci il tuo REDDITO ANNUALE: ");
-                //Console.WriteLine("8. Calcola le tue IMPOSTE: ");
-                Console.WriteLine("3. ESCI");
+                Console.WriteLine("3. Esci dal programma.");
 
                 int scelta = int.Parse(Console.ReadLine());
 
@@ -79,7 +73,7 @@ namespace Calcolo_Imposte
 
                 if (scelta == 1)
                 {
-                    //Compilazione();
+                    Compilazione();
                 }
                 if (scelta == 2)
                 {
@@ -88,7 +82,7 @@ namespace Calcolo_Imposte
                 if (scelta == 3)
                 {
                     Console.WriteLine("Chiusura del programma...");
-                    Environment.Exit(3);
+                    Environment.Exit(0);
                 }
                 else
                 {
@@ -109,6 +103,54 @@ namespace Calcolo_Imposte
             Console.WriteLine("\n\n\tTI TROVEREMO!!!!!\n\n");
             Console.WriteLine("=================================");
             StartMenu();
+        }
+        public void Compilazione()
+        {
+            Console.WriteLine("\nInserisci il tuo NOME: ");
+            string Nome = Console.ReadLine();
+            Console.WriteLine("\nInserisci il tuo COGNOME: ");
+            string Cognome = Console.ReadLine();
+            Console.WriteLine("\nInserisci la tua DATA DI NASCITA in formato(GG/MM/AAAA):");
+            string DataDiNascita = Console.ReadLine();
+            Console.WriteLine("\nInserisci il tuo CODICE FISCALE: ");
+            string CodiceFiscale = Console.ReadLine();
+            Console.WriteLine("\nInserisci il tuo SESSO (m/f): ");
+            string Sesso = Console.ReadLine();
+            Console.WriteLine("\nInserisci il tuo COMUNE DI RESIDENZA: ");
+            string ComuneDiResidenza = Console.ReadLine();
+            Console.WriteLine("\nInserisci il tuo REDDITO ANNUALE: ");
+            double RedditoAnnuale = double.Parse(Console.ReadLine());
+            Contribuente x = new Contribuente();
+            _nome = Nome;
+            _cognome = Cognome;
+            _dataDiNascita = DataDiNascita;
+            _codiceFiscale = CodiceFiscale;
+            _sesso = Sesso;
+            _comuneDiResidenza = ComuneDiResidenza;
+            _redditoAnnuale = RedditoAnnuale;
+            double imposta23 = _redditoAnnuale * 23 / 100;
+            double imposta27 = (_redditoAnnuale - 15000) * 27 / 100 + 3450;
+            double imposta38 = (_redditoAnnuale - 28000) * 38 / 100 + 6960;
+            
+                Console.WriteLine("=================================");
+                Console.WriteLine($"\nContribuente {_nome} {_cognome}");
+                Console.WriteLine($"Nato il {_dataDiNascita} ({_sesso})");
+                Console.WriteLine($"Residente in {_comuneDiResidenza}");
+                Console.WriteLine($"Codice fiscale: {_codiceFiscale}");
+                Console.WriteLine($"\nReddito dichiarato: {_redditoAnnuale}\n");
+            if (_redditoAnnuale < 15000)
+            {
+                Console.WriteLine($"IMPOSTA DA VERSARE: {imposta23}");
+                StartMenu();
+            }if (_redditoAnnuale >= 15001 && _redditoAnnuale <= 28000)
+            {
+                Console.WriteLine($"IMPOSTA DA VERSARE: {imposta27}");
+                StartMenu();
+            }if (_redditoAnnuale >= 28001 && _redditoAnnuale <= 55000)
+            {
+                Console.WriteLine($"IMPOSTA DA VERSARE: {imposta38}");
+                StartMenu();
+            }
         }
     }
 }
