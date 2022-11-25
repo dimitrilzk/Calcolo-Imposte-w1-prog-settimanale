@@ -10,6 +10,8 @@ namespace Calcolo_Imposte
     {
         static void Main(string[] args)
         {
+            Contribuente impiegato = new Contribuente();
+            impiegato.StartMenu();
         }
     }
 }
